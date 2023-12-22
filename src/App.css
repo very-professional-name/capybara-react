@@ -1,38 +1,156 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Comic Sans MS", "Comic Sans";
+}
+
 .App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+}
+
+.Sidebar{
+  width: 300px;
+  min-width: 210px;
+  height: 100%;
+}
+
+.MainComponent{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: url(https://s28164.pcdn.co/files/capybara-blog-1-scaled-e1651775301382.jpg);
+}
+
+.User{
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-around;
+  padding: 1rem;
+  border: 1px solid #ebebeb;
+}
+
+.AddNewTask {
+  border-bottom: 1px solid #ebebeb;
+}
+.AddNewTask .btn {
+  padding: 1rem;
+  width: 100%;
+  height: 70px;
+}
+.AddNewTask .btn button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 3px;
+  font-size: 1rem;
+  background-color: #0080ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.AddNewTask .btn button:hover {
+  filter: brightness(1.1);
+  transition: all 300ms ease;
+}
+
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+}
+.Modal .container {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  background: white;
+}
+
+/* AddNewTodo form */
+.AddNewTask form {
+  padding: 1rem 1rem calc(1rem + 40px) 1rem;
+  width: 500px;
+  background: white;
+  border-radius: 4px;
+}
+.AddNewTask form .text input {
+  padding: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  border: none;
+  font-size: 1.2rem;
+}
+.AddNewTask form .text input:focus {
+  outline: none;
+  border-bottom: 1px solid #0080ff;
+}
+.AddNewTask form .remind {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+}
+.AddNewTask form p {
+  margin-left: 10px;
+}
+.AddNewTask form .title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.AddNewTask form .pick-day {
+  padding: 1.5rem 1.5rem 0 1.5rem;
+}
+.AddNewTask form .pick-time {
+  padding: 1.5rem;
+}
+.AddNewTask form .pick-project {
+  padding: 0.5rem;
+}
+.AddNewTask form .pick-project .projects {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 1rem 0 1rem;
+}
+.AddNewTask form .pick-project .projects .project {
+  border: 1px solid #0080ff;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+.AddNewTask form .pick-project .projects .active {
+  background: #0080ff;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.AddNewTask form .cancel {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  cursor: pointer;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.AddNewTask form .confirm {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.AddNewTask form .confirm button {
+  width: 100%;
+  height: 40px;
+  background: #0080ff;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
 }
