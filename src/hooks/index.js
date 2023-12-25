@@ -13,19 +13,20 @@ export function useTasks() {
     async function getTasks(db) {
         const tasksCol = collection(db, 'tasks');
         const taskSnapshot = await getDocs(tasksCol);
-
-        console.log(`Fetched ${taskSnapshot.size} documents`);
         const taskList = taskSnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
+           
         }));
 
         setTasks(taskList);
+
     }
 
     useEffect(() => {
         getTasks(db);
     }, [db]);
+    return tasks;
 }
 
 export function useProjects() {
