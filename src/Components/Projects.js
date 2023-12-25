@@ -44,7 +44,7 @@ function Projects() {
                     //     )
 
                     projects.map(project =>
-                             <p> {console.log(project)} </p>
+                            <Project project={project} key={project.id} edit={edit}/>
                             
                              )
                 }

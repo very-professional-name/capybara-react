@@ -14,13 +14,13 @@ function Project({project, edit}){
         <div className='Project'>
             <div
                 className="name"
-                onClick={ () => setSelectedProject(project.name)}
+                onClick={ () => setSelectedProject(project.projectName)}
             >
-                {project.name}
+                {project.projectName}
             </div>
             <div className="btns">
                 {
-                    edit ?
+                    
                     <div className="edit-delete">
                         <span
                             className="edit"
@@ -32,13 +32,7 @@ function Project({project, edit}){
                             <XCircle size="13" />
                         </span>
                     </div>
-                    :
-                    project.numOfTasks === 0 ?
-                    ""
-                    :
-                    <div className="total-tasks">
-                        {project.numOfTasks}
-                    </div>
+                    
                 }
             </div>
             <Modal showModal={showModal} setShowModal={setShowModal}>

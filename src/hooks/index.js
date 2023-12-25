@@ -31,12 +31,16 @@ export function useTasks() {
 export function useProjects() {
     const [projects, setProjects] = useState([]);
 
+  
+
+
     async function getProjects(db) {
         const projectsCol = collection(db, 'projects');
         const projectsSnapshot = await getDocs(projectsCol);
         const projectList = projectsSnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
+           
         }));
 
         setProjects(projectList);
