@@ -18,7 +18,7 @@ function App() {
       <Sidebar>
         <User />
         <AddNewTask />
-        <Calendar> </Calendar>
+        <Calendar/>
         <Projects />
       </Sidebar>
 

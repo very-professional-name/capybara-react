@@ -1,17 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import Modal from './Modal'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { Bell, CalendarDay, Clock, Palette, X } from 'react-bootstrap-icons'
+
 import dayjs from 'dayjs';
 import TaskForm from './TaskForm';
+import { TaskContext } from '../context';
 
 function AddNewTask(){
+
+    const { selectedProject } = useContext(TaskContext)
     const [showModal, setShowModal] = useState(false)
     const [text, setText] = useState("")
     const [date, setDate] = useState("")
     const [hour, setHour] = useState("")
-
+    const [taskProject, setTaskProject] = useState(selectedProject)
     const projects = [
         { id : 1, name : "personal", numOfTasks : 0 },
         { id : 2, name : "work", numOfTasks : 1 },
@@ -21,6 +22,11 @@ function AddNewTask(){
     function handleSubmit(e){
 
     }
+
+    useEffect(() => {
+
+            setTaskProject(selectedProject)
+    }, [selectedProject])
 
     return (
         <div className='AddNewTask'>
@@ -40,6 +46,8 @@ function AddNewTask(){
                     hour={hour}
                     setHour={setHour}
                     projects={projects}
+                    taskProject={taskProject}
+                    setTaskProject={setTaskProject}
                     showButtons={true}
                     setShowModal={setShowModal}
                 />

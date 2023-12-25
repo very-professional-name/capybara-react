@@ -10,6 +10,7 @@ function TaskForm({
     text, setText,
     date, setDate,
     hour, setHour,
+    taskProject, setTaskProject,
     projects, showButtons = false, setShowModal = false
 }) {
 
@@ -17,72 +18,78 @@ function TaskForm({
 
         <div>
             <form onSubmit={handleSubmit} className='TaskForm'>
-                <div className='text'>
-                    <h3>
-                        Add new task!
-                    </h3>
-                    <input type='text'
+                <div className="text">
+                    {
+                        header && 
+                        <h3>{header}</h3>
+                    }
+                    <input
+                        type='text'
                         value={text}
                         onChange={e => setText(e.target.value)}
-                        placeholder='To do...'
+                        placeholder='To do ...'
                         autoFocus
                     />
                 </div>
-                <div className='remind'>
+                <div className="remind">
                     <Bell />
-                    <p> Remind me</p>
+                    <p>Remind Me!</p>
                 </div>
-                <div className='pick-day'>
-                    <div className='title'>
+                <div className="pick-day">
+                    <div className="title">
                         <CalendarDay />
-                        <DatePicker
-                            value={date}
-                            onChange={date => setDate(date)}
-                        />
-
+                        <p>Choose a day</p>
                     </div>
+                    <DatePicker
+                        value={date}
+                        onChange={date => setDate(date)}
+                    />
                 </div>
-                <div className='pick-time'>
-                    <div className='title'>
+                <div className="pick-time">
+                    <div className="title">
                         <Clock />
-                        <TimePicker
-                            value={hour}
-                            onChange={hour => setHour(hour)}
-                        />
-
+                        <p>Choose time</p>
                     </div>
+                    <TimePicker
+                        value={hour}
+                        onChange={hour => setHour(hour)}
+                    />
                 </div>
-                <div className='pick-project'>
-                    <p> select a project </p>
-                    < Palette />
-
-                </div>
-                <div className='projects'>
-                    {projects.map(project =>
-
-                        <div className='project' key={project.id}>
-                            {project.name}
-                        </div>
-
-
-                    )}
+                <div className="pick-project">
+                    <div className="title">
+                        <Palette />
+                        <p>Choose a project</p>
+                    </div>
+                    <div className="projects">
+                        {
+                            projects.length > 0 ?
+                            projects.map( project => 
+                                <div
+                                    className={`project ${taskProject === project.name ? "active" : ""}`}
+                                    onClick={() => setTaskProject(project.name)}
+                                    key={project.id}
+                                >
+                                    {project.name}
+                                </div>    
+                            )
+                            :
+                            <div style={{color:'#ff0000'}}>
+                                Please add a project before proceeding
+                            </div>
+                        }
+                    </div>
                 </div>
                 {
-
                     showButtons &&
                     <div>
-                        <div className='cancel' onClick={() => setShowModal(false)}>
-                            < X />
+                        <div className="cancel" onClick={() => setShowModal(false)}>
+                            <X size='40' />
                         </div>
-                        <div className='confirm'>
-                            <button> + ADD </button>
+                        <div className="confirm">
+                            <button>+ Add to do</button>
                         </div>
-
-
                     </div>
-
                 }
-
             </form>
         </div>
 

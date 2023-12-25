@@ -8,9 +8,9 @@ function Projects() {
     const [edit, setEdit] = useState(false)
     const pencilColor = edit ? "#228B22" : "#000000"
     const projects = [
-        { id: 1, name: "Php project", numOfTasks : 5},
-        { id: 2, name: "Work project", numOfTasks : 2},
-        { id: 3, name: "Semester project", numOfTasks : 4}
+        { id : 1, name : "personal", numOfTasks : 0 },
+        { id : 2, name : "work", numOfTasks : 1 },
+        { id : 3, name : "other", numOfTasks : 2 }
     ]
     return (
         <div className="Projects">

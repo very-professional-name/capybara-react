@@ -4,10 +4,11 @@ import Modal from "./Modal";
 import ProjectForm from "./ProjectForm";
 function AddNewProject(){
     const [showModal, setShowModal] = useState(false)
-    const [projectName, setProjectName] = useState("")
+    const [projectName, setProjectName] = useState('')
     function handleSubmit(e){
 
     }
+
     return (
         <div className='AddNewProject'>
             <div className="add-button">
@@ -28,4 +29,5 @@ function AddNewProject(){
         </div>
     )
 }
+
 export default AddNewProject

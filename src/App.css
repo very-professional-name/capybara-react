@@ -1,34 +1,39 @@
+
 * {
+  
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Comic Sans MS", "Comic Sans";
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
-
+/* App */
 .App {
-
+  
   display: flex;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-
 }
 
-.Sidebar{
+/* Sidebar */
+.Sidebar {
   width: 300px;
   min-width: 210px;
   height: 100%;
 }
 
-.MainComponent{
+/* Main */
+.Main {
+  background-image: url(https://images2.alphacoders.com/587/thumb-1920-587359.jpg);
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  background: url(https://s28164.pcdn.co/files/capybara-blog-1-scaled-e1651775301382.jpg);
+  position: relative;
 }
 
-.User{
+/* User */
+.User {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -36,15 +41,49 @@
   border: 1px solid #ebebeb;
 }
 
-.TaskForm {
+.User .logo img {
+  width: 50px;
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+
+.User .info p {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.User .info a {
+  text-decoration: none;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Modal */
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 99;
+}
+.Modal .container {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+}
+/* AddNewTodo */
+.AddNewTask {
   border-bottom: 1px solid #ebebeb;
 }
-.TaskForm .btn {
+.AddNewTask .btn {
   padding: 1rem;
   width: 100%;
   height: 70px;
 }
-.TaskForm .btn button {
+.AddNewTask .btn button {
   width: 100%;
   height: 100%;
   border: none;
@@ -55,34 +94,18 @@
   font-weight: bold;
   cursor: pointer;
 }
-.TaskForm .btn button:hover {
+.AddNewTask .btn button:hover {
   filter: brightness(1.1);
   transition: all 300ms ease;
 }
-
-.Modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
-}
-.Modal .container {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -25%);
-  background: white;
-}
-
-.TaskForm  {
+/* AddNewTodo form */
+.TaskForm {
   padding: 1rem 1rem calc(1rem + 40px) 1rem;
-  width: 500px;
+  width: 100%;
   background: white;
   border-radius: 4px;
 }
-.TaskForm  .text input {
+.TaskForm .text input {
   padding: 1rem;
   width: 100%;
   margin-bottom: 0.5rem;
@@ -93,57 +116,57 @@
   outline: none;
   border-bottom: 1px solid #0080ff;
 }
-.TaskForm  .remind {
+.TaskForm .remind {
   display: flex;
   align-items: center;
   padding: 0.5rem;
 }
-.TaskForm  {
+.TaskForm p {
   margin-left: 10px;
 }
-.TaskForm  .title {
+.TaskForm .title {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
 }
-.TaskForm  .pick-day {
+.TaskForm .pick-day {
   padding: 1.5rem 1.5rem 0 1.5rem;
 }
-.TaskForm  .pick-time {
+.TaskForm .pick-time {
   padding: 1.5rem;
 }
-.TaskForm  .pick-project {
+.TaskForm .pick-project {
   padding: 0.5rem;
 }
-.TaskForm  .pick-project .projects {
+.TaskForm .pick-project .projects {
   display: flex;
   flex-wrap: wrap;
   padding: 1rem 1rem 0 1rem;
 }
-.TaskForm  .pick-project .projects .project {
+.TaskForm .pick-project .projects .project {
   border: 1px solid #0080ff;
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
   cursor: pointer;
 }
-.AddNewTask  .pick-project .projects .active {
+.TaskForm .pick-project .projects .active {
   background: #0080ff;
   color: white;
 }
-.AddNewTask  .cancel {
+.TaskForm .cancel {
   position: absolute;
   top: 0;
   right: 5px;
   cursor: pointer;
 }
-.AddNewTask  .confirm {
+.TaskForm .confirm {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
 }
-.AddNewTask form .confirm button {
+.TaskForm .confirm button {
   width: 100%;
   height: 40px;
   background: #0080ff;
@@ -153,7 +176,7 @@
   border-radius: 0 0 4px 4px;
   cursor: pointer;
 }
-
+/* Calendar */
 .Calendar {
   padding: 1rem;
   border-bottom: 1px solid #ebebeb;
@@ -194,6 +217,8 @@
   font-size: 1rem;
   cursor: pointer;
 }
+
+/* Projects */
 .Projects {
   padding: 1rem;
   border-bottom: 1px solid #ebebeb;
@@ -235,8 +260,7 @@
 .Projects .items {
   padding: 0.5rem;
 }
-
-
+/* Project */
 .Project {
   position: relative;
   display: flex;
@@ -253,7 +277,7 @@
   display: flex;
   align-items: center;
 }
-.Project .btns .total-tasks {
+.Project .btns .total-todos {
   position: absolute;
   right: 0;
   background: #ebebeb;
@@ -287,6 +311,11 @@
   background: #ffacac;
 }
 
+/* AddNewProject */
+.AddNewProject .add-button span {
+  margin-right: 5px;
+}
+/* ProjectForm */
 .ProjectForm {
   background-color: white;
   padding: 1rem;
@@ -329,20 +358,17 @@
   filter: brightness(1.1);
 }
 
-.AddNewProject .add-button span {
-  margin-right: 5px;
-}
-
+/* Todos */
 .Tasks {
   width: 450px;
   height: 80%;
   background-color: white;
 
-  bottom: 40px;
-  left: 40px;
+  position: absolute;
+ 
 
   border-radius: 4px;
-  opacity: 1;
+  opacity: 0.9;
 
   padding: 0 0.5rem 0.5rem 0.5rem;
 }
@@ -356,14 +382,16 @@
 }
 .Tasks .tasks {
   overflow-y: auto;
-}.Task {
+}
+/* Todo */
+.Task {
   padding: 0.5rem 1rem;
 }
 .Task .task-container {
   display: flex;
   align-items: center;
 }
-.Task .task-container span {
+.Task .task-containerr span {
   cursor: pointer;
 }
 .Task .task-container .text {
@@ -390,12 +418,10 @@
 .Task .task-container .add-to-next-day {
   margin-right: 10px;
 }
-
-
+/* EditTodo */
 .EditTask {
   position: absolute;
-  top: 20px;
-  left: calc(250px + 450px + 40px);
+  right: calc(40px + 450px + 40px);
 
   background-color: white;
 
