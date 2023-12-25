@@ -9,41 +9,27 @@ const db = getFirestore(firebaseapp);
 
 export function useTasks() {
     const [tasks, setTasks] = useState([]);
+
     async function getTasks(db) {
         const tasksCol = collection(db, 'tasks');
         const taskSnapshot = await getDocs(tasksCol);
 
         console.log(`Fetched ${taskSnapshot.size} documents`);
-        const WIPArray = []
-        const taskList = taskSnapshot.docs.map(doc => {
-            return {
-                id : doc.id,
-                ...doc.data()
-            }
-            setTasks(taskList)
-    })
-  
+        const taskList = taskSnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
 
-        console.log(taskList)
-
-        return tasks
-
-      }
+        setTasks(taskList);
+    }
 
     useEffect(() => {
-      
-        getTasks(db)
-  
-      
-  
-      
-    }, [db]); 
-  }
+        getTasks(db);
+    }, [db]);
+}
 
-
-export function useProjects(){
-    const [projects, setProjects] = useState([])
-
+export function useProjects() {
+    const [projects, setProjects] = useState([]);
 
     async function getProjects(db) {
         const projectsCol = collection(db, 'projects');
@@ -51,28 +37,14 @@ export function useProjects(){
         const projectList = projectsSnapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
-          }))
-    
-          setProjects(projectList);
-        
-          return projects
-        
-      }
+        }));
 
+        setProjects(projectList);
+    }
 
-            useEffect(() => {
+    useEffect(() => {
+        getProjects(db);
+    }, []); // Removed the unnecessary return statement
 
-                
-                  
-                getProjects(db)
-
-
-                 
-
-            },[])
-          
-    
-   
-
+    return projects; // Return the projects state after it's updated
 }
-

@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Project from "./Project";
 import AddNewProject from "./AddNewProject";
 import RenameProject from "./RenameProject";
 import { CaretUp, PencilFill } from "react-bootstrap-icons";
+import Task from "./Task";
+import { TaskContext } from "../context";
 function Projects() {
     const [showMenu, setShowMenu] = useState(true)
     const [edit, setEdit] = useState(false)
     const pencilColor = edit ? "#228B22" : "#000000"
-    const projects = [
-        { id : 1, name : "personal", numOfTasks : 0 },
-        { id : 2, name : "work", numOfTasks : 1 },
-        { id : 3, name : "other", numOfTasks : 2 }
-    ]
+    //  const projects = [
+    //      { id : 1, name : "personal", numOfTasks : 0 },
+    //      { id : 2, name : "work", numOfTasks : 1 },
+    //      { id : 3, name : "other", numOfTasks : 2 }
+    //  ]
+
+    const { projects } = useContext(TaskContext)
+
     return (
         <div className="Projects">
             <div className="header">
@@ -33,10 +38,15 @@ function Projects() {
             </div>
             <div className="items">
                 {
-                    projects.map(project =>
-                        <Project project={project} key={project.id} edit={edit}/>
+                    // projects.map(project =>
+                    //     <Project project={project} key={project.id} edit={edit}/>
                         
-                        )
+                    //     )
+
+                    projects.map(project =>
+                             <p> {console.log(project)} </p>
+                            
+                             )
                 }
 
             </div>
