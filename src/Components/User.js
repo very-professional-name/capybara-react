@@ -6,9 +6,7 @@ function User(){
                 <div className="info">
                     <p> Username </p>
                     <a href ='#'> Logout </a>
-                    {
-                        useTasks()
-                    }
+                    
                 </div>
         </div>
     )
