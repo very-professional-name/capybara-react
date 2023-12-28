@@ -65,11 +65,11 @@ function TaskForm({
                             projects.length > 0 ?
                             projects.map( project => 
                                 <div
-                                    className={`project ${taskProject === project.name ? "active" : ""}`}
-                                    onClick={() => setTaskProject(project.name)}
+                                    className={`project ${taskProject === project.projectName ? "active" : ""}`}
+                                    onClick={() => setTaskProject(project.projectName)}
                                     key={project.id}
                                 >
-                                    {project.name}
+                                    {project.projectName}
                                 </div>    
                             )
                             :

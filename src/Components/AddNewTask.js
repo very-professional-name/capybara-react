@@ -1,26 +1,51 @@
 import React, {useState, useContext, useEffect} from 'react'
 import Modal from './Modal'
-
+import * as moment from 'moment';
 import dayjs from 'dayjs';
 import TaskForm from './TaskForm';
 import { TaskContext } from '../context';
+import { calendarItems } from '../Components/constants';
+import { addDoc, collection, doc, setDoc } from "firebase/firestore"; 
+import { getFirestore } from "firebase/firestore";
+import firebaseapp from '../firebase';
+import randomColor from 'randomcolor';
+
+
+
 
 function AddNewTask(){
 
-    const { selectedProject } = useContext(TaskContext)
+    const { selectedProject, projects } = useContext(TaskContext)
     const [showModal, setShowModal] = useState(false)
     const [text, setText] = useState("")
     const [date, setDate] = useState("")
     const [hour, setHour] = useState("")
     const [taskProject, setTaskProject] = useState(selectedProject)
-    const projects = [
-        { id : 1, name : "personal", numOfTasks : 0 },
-        { id : 2, name : "work", numOfTasks : 1 },
-        { id : 3, name : "other", numOfTasks : 2 }
-    ]
+    const db = getFirestore(firebaseapp);
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
+        e.preventDefault()
+        if ( text ) {
+            console.log("i didnt take a shit 1")
+            await addDoc(collection(db, "tasks"), {
+                text: text,
+                checked:false,
+                date: dayjs(date).format('DD/MM/YYYY'),
+                hour: dayjs(hour).format('HH:mm'),
+                projectName: taskProject,
+                color: randomColor()
 
+                
+            
+              });
+              setShowModal(false)
+              setText('')
+              setDate(new Date())
+              setHour(new Date())
+
+        }
+
+        console.log("i didnt take a shit 2")
     }
 
     useEffect(() => {
