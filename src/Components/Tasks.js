@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Next7Days from "./Next7Days";
+import Next30Days from "./Next30Days";
 import Task from "./Task";
 import { TaskContext } from "../context";
 function Tasks() {
@@ -37,6 +38,8 @@ function Tasks() {
             </div>
             <div className="tasks">
                  {
+                selectedProject === "next 30 days" ?
+                <Next30Days tasks={tasks} /> :
                 selectedProject === "next 7 days" ?
                 <Next7Days tasks={tasks} />
                 :

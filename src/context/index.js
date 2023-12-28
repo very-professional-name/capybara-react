@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { useTasks, useProjects } from "../hooks";
+import { useTasks, useProjects, useFilteredTasks } from "../hooks";
 const TaskContext = createContext()
 
 function TaskContextProvider({children}){
@@ -7,7 +7,8 @@ function TaskContextProvider({children}){
     const [selectedProject, setSelectedProject] = useState(defaultProject)
 
     const tasks = useTasks()
-    const projects = useProjects() 
+    const projects = useProjects()
+    const filteredTasks = useFilteredTasks(tasks, selectedProject)
     return (
         <TaskContext.Provider
         
@@ -15,7 +16,7 @@ function TaskContextProvider({children}){
             {
                 selectedProject,
                 setSelectedProject,
-                tasks,
+                tasks: filteredTasks,
                 projects
             }
 

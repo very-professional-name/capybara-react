@@ -25,7 +25,9 @@ function Task({task}){
                 </div>
                 <div className="text">
                     <p style={{color : task.checked ? '#bebebe' : '#000000'}}>{task.text}</p>
-                    <span>{task.hour} - {task.projectName}</span>
+                    <span>{task.hour} - {task.date} - {task.projectName}</span>
+                    
+
                     <div className={`line ${task.checked ? 'line-through' : ''}`}></div>
                 </div>
                 <div className="add-to-next-day">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import moment from 'moment'
 import Task from "./Task";
 
-function Next7Days({ tasks }) {
+function Next30Days({ tasks }) {
   const [weekTasks, setWeekTasks] = useState([]);
 
   useEffect(() => {
@@ -14,12 +14,12 @@ function Next7Days({ tasks }) {
       return new Date(`${year}-${month}-${day}`);
     };
 
-    const oneWeekFromNow = new Date();
-    oneWeekFromNow.setDate(currentDate.getDate() + 7);
+    const oneMonthFromNow = new Date();
+    oneMonthFromNow.setDate(currentDate.getDate() + 30);
 
     const filteredTasks = tasks.filter((task) => {
       const taskDate = parseDate(task.date);
-      return taskDate >= currentDate && taskDate <= oneWeekFromNow;
+      return taskDate >= currentDate && taskDate <= oneMonthFromNow;
     });
 
     filteredTasks.sort((a, b) => parseDate(a.date) - parseDate(b.date));
@@ -36,4 +36,4 @@ function Next7Days({ tasks }) {
   );
 }
 
-export default Next7Days;
+export default Next30Days;
