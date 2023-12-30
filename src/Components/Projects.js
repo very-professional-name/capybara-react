@@ -9,11 +9,7 @@ function Projects() {
     const [showMenu, setShowMenu] = useState(true)
     const [edit, setEdit] = useState(false)
     const pencilColor = edit ? "#228B22" : "#000000"
-    //  const projects = [
-    //      { id : 1, name : "personal", numOfTasks : 0 },
-    //      { id : 2, name : "work", numOfTasks : 1 },
-    //      { id : 3, name : "other", numOfTasks : 2 }
-    //  ]
+    
 
     const { projects } = useContext(TaskContext)
 

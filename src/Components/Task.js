@@ -1,9 +1,39 @@
 import React from "react";
 import { useState } from "react";
-import { Circle, CheckCircleFill, ArrowClockwise, Trash } from "react-bootstrap-icons";
+import firebaseapp from "../firebase";
+import { getFirestore, doc, deleteDoc, updateDoc } from 'firebase/firestore';
+
+import { Circle, CheckCircleFill, ArrowClockwise, Trash, Check } from "react-bootstrap-icons";
 
 function Task({task}){
     const [hover, setHover] = useState(false)
+    const deleteTask = async (task) => {
+        try {
+            const db = getFirestore();
+            const taskDocRef = doc(db, 'tasks', task.id);
+            await deleteDoc(taskDocRef);
+            console.log('Task deleted successfully');
+        } catch (error) {
+            console.error('Error deleting task:', error);
+        }
+    };
+
+    const setTaskStatusToChecked = async (task) => {
+        try {
+            const db = getFirestore();
+            const taskDocRef = doc(db, 'tasks', task.id);
+            
+            // Update the 'checked' field to true
+            await updateDoc(taskDocRef, {
+                checked: true,
+            });
+    
+            console.log('Task status set to checked successfully');
+        } catch (error) {
+            console.error('Error setting task status to checked:', error);
+        }
+    };
+
     return (
         <div className='Task'>
             <div
@@ -38,7 +68,18 @@ function Task({task}){
                         </span>
                     }
                 </div>
-                <div className="delete-task">
+                <div className="check-task"
+                onClick={() => setTaskStatusToChecked(task) }>
+                    {
+                        (hover || task.checked) &&
+                        <span>
+                            <Check size="40"/>
+                        </span>
+                    }
+                </div>
+
+                <div className="delete-task"
+                onClick={() => deleteTask(task) }>
                     {
                         (hover || task.checked) &&
                         <span>
@@ -46,6 +87,7 @@ function Task({task}){
                         </span>
                     }
                 </div>
+
             </div>
         </div>
     )
