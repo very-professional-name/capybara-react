@@ -23,7 +23,7 @@ function RenameProject({project, setShowModal}){
                 // Update the project name
                 const projectDocRef = doc(db, 'projects', project.id);
                 await updateDoc(projectDocRef, {
-                    name: newProjectName,
+                    projectName: newProjectName,
                 });
     
                 // Update todos with the new project name

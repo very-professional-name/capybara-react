@@ -9,9 +9,9 @@ function Projects() {
     const [showMenu, setShowMenu] = useState(true)
     const [edit, setEdit] = useState(false)
     const pencilColor = edit ? "#228B22" : "#000000"
-    
 
     const { projects } = useContext(TaskContext)
+
 
     return (
         <div className="Projects">
