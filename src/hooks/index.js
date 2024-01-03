@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import firebaseapp from "../firebase";
 import moment from 'moment';
 import 'firebase/compat/firestore';
@@ -89,3 +89,37 @@ export function useFilteredTasks(tasks, selectedProject) {
   
     return filteredTasks;
   }
+
+  export function useUser() {
+    const [user, setUser] = useState(null);
+
+    async function getUser(db) {
+        try {
+            const usersCollection = collection(db, 'users');
+            const userQuery = query(usersCollection, where('user_id', '==', '1')); // Adjust the field name and value
+
+            const userSnapshot = await getDocs(userQuery);
+
+            if (!userSnapshot.empty) {
+                // Assuming there is only one user with the given user_id
+                const userData = userSnapshot.docs[0].data();
+                setUser({
+                    id: userSnapshot.docs[0].id,
+                    ...userData
+                });
+            } else {
+                console.log('User not found');
+                setUser(null);
+            }
+        } catch (error) {
+            console.error('Error fetching user:', error);
+            setUser(null);
+        }
+    }
+
+    useEffect(() => {
+        getUser(db);
+    }, [db]);
+
+    return user;
+}

@@ -3,6 +3,7 @@ import Next7Days from "./Next7Days";
 import Next30Days from "./Next30Days";
 import Task from "./Task";
 import { TaskContext } from "../context";
+import Expired from "./Expired";
 function Tasks() {
 
     const { selectedProject } = useContext(TaskContext)
@@ -40,6 +41,8 @@ function Tasks() {
                  {
                 selectedProject === "next 30 days" ?
                 <Next30Days tasks={tasks} /> :
+                selectedProject === "expired" ?
+                <Expired /> :
                 selectedProject === "next 7 days" ?
                 <Next7Days tasks={tasks} />
                 :

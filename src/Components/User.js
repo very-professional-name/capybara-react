@@ -1,14 +1,21 @@
 import React from "react";
-import useTasks from "../hooks";
-function User(){
-    return(
+import { useUser } from "../hooks";
+
+function User() {
+    const user = useUser();
+
+    return (
         <div className="User">
+            {user ? (
                 <div className="info">
-                    <p> Username </p>
-                    <a href ='#'> Logout </a>
-                    
+                    <p>{user.username}</p>
+                    <a href='#'>Logout</a>
                 </div>
+            ) : (
+                <p>Loading...</p>
+            )}
         </div>
-    )
+    );
 }
-export default User
+
+export default User;
