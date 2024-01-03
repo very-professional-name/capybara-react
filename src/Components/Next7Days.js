@@ -4,6 +4,8 @@ import Task from "./Task";
 
 function Next7Days({ tasks }) {
   const [weekTasks, setWeekTasks] = useState([]);
+  
+
 
   useEffect(() => {
     const currentDate = new Date();

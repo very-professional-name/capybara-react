@@ -80,7 +80,21 @@ export function useFilteredTasks(tasks, selectedProject) {
         });
       } else if (selectedProject === 'all tasks') {
         data = tasks;
-      } else {
+      }
+
+      else if (selectedProject === 'old tasks'){
+        const currentDate = moment();
+      data = tasks.filter((task) => {
+        const taskDate = moment(task.date, 'DD/MM/YYYY');
+        return taskDate.isBefore(currentDate, 'day');});
+
+      }
+      
+      
+      
+      
+      
+      else {
         data = tasks.filter((task) => task.projectName === selectedProject);
       }
   
