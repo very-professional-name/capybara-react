@@ -104,36 +104,35 @@ export function useFilteredTasks(tasks, selectedProject) {
     return filteredTasks;
   }
 
-  export function useUser() {
+  export function useUser(user_id, db) {
     const [user, setUser] = useState(null);
-
-    async function getUser(db) {
-        try {
-            const usersCollection = collection(db, 'users');
-            const userQuery = query(usersCollection, where('user_id', '==', '1')); // Adjust the field name and value
-
-            const userSnapshot = await getDocs(userQuery);
-
-            if (!userSnapshot.empty) {
-                // Assuming there is only one user with the given user_id
-                const userData = userSnapshot.docs[0].data();
-                setUser({
-                    id: userSnapshot.docs[0].id,
-                    ...userData
-                });
-            } else {
-                console.log('User not found');
-                setUser(null);
-            }
-        } catch (error) {
-            console.error('Error fetching user:', error);
-            setUser(null);
+  
+    async function getUser() {
+      try {
+        const usersCollection = collection(db, 'users');
+        const userQuery = query(usersCollection, where('user_id', '==', user_id));
+  
+        const userSnapshot = await getDocs(userQuery);
+  
+        if (!userSnapshot.empty) {
+          const userData = userSnapshot.docs[0].data();
+          setUser({
+            id: userSnapshot.docs[0].id,
+            ...userData
+          });
+        } else {
+          console.log('User not found');
+          setUser(null);
         }
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        setUser(null);
+      }
     }
-
+  
     useEffect(() => {
-        getUser(db);
-    }, [db]);
-
+      getUser();
+    }, [user_id, db]);
+  
     return user;
-}
+  }

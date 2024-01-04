@@ -9,6 +9,7 @@ import Projects from './Components/Projects';
 import Tasks from './Components/Tasks';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import Capybara from './Components/Capybara';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <EditTask />
 
       </Main>
+      <Capybara />
       </LocalizationProvider>
     </div>
     

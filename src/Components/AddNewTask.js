@@ -33,7 +33,8 @@ function AddNewTask(){
                 date: dayjs(date).format('DD/MM/YYYY'),
                 hour: dayjs(hour).format('HH:mm'),
                 projectName: taskProject,
-                color: randomColor()
+                color: randomColor(),
+                value: 2
 
                 
             
