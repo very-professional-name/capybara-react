@@ -1,106 +1,106 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useCapybara, useTasks, useUser } from "../hooks";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 
-
 function Capybara() {
-    const capybara = useCapybara();
-    const tasks = useTasks()
-    const user = useUser()
-    const feedCapybara = async () => {
-        try {
-            const db = getFirestore();
-            const capybaraDocRef = doc(db, 'capybara', 'DC5C6urCZ800qCt8LqEO');
+  const capybara = useCapybara();
+  const tasks = useTasks();
+  const [loading, setLoading] = useState(true);
 
-            await updateDoc(capybaraDocRef, {
-                capybara_hungry: false,
-            });
+  const user = useUser("1", getFirestore());
 
-            console.log('Capybara fed successfully');
-        } catch (error) {
-            console.error('Error feeding capybara:', error);
-        }
-    };
+  useEffect(() => {
+    if (user !== null) {
+      setLoading(false);
+    }
+  }, [user]);
 
-    const waterCapybara = async () => {
-        try {
-            const db = getFirestore();
-            const capybaraDocRef = doc(db, 'capybara', 'DC5C6urCZ800qCt8LqEO');
+  const capybaraDocId = 'DC5C6urCZ800qCt8LqEO';
 
-            await updateDoc(capybaraDocRef, {
-                capybara_thirsty: false,
-            });
+  const feedCapybara = async () => {
+    try {
+      if (user?.money < 1) {
+        alert('Get some more coins by doing tasks');
+        return;
+      }
 
-            console.log('Capybara fed successfully');
-        } catch (error) {
-            console.error('Error feeding capybara:', error);
-        }
-    };
+      const db = getFirestore();
+      const capybaraDocRef = doc(db, 'capybara', capybaraDocId);
 
+      // Update capybara state
+      await updateDoc(capybaraDocRef, {
+        capybara_hungry: false,
+      });
 
+      // Update user state
+      const userDocRef = doc(db, 'users', user.id);
+      await updateDoc(userDocRef, {
+        money: user.money - 1,
+      });
 
+      console.log('Capybara fed successfully');
+    } catch (error) {
+      console.error('Error feeding capybara:', error);
+    }
+  };
 
-    return (
-        <div className="capybara">
-            {capybara ? (
-                <div className="project">
+  const waterCapybara = async () => {
+    try {
+      if (user?.money < 1) {
+        alert('Get some more coins by doing tasks');
+        return;
+      }
 
-                    <section> {capybara.capybara_name} tells you that you have {tasks.length} things to do</section>
-                    {capybara.capybara_hungry == true || capybara.capybara_thirsty == true ?
-                        (
-                            <img className="" src="https://i.imgur.com/gtvYvWn.png" alt={"Crappybara"} width="190" height="240" />
+      const db = getFirestore();
+      const capybaraDocRef = doc(db, 'capybara', capybaraDocId);
 
-                        ) :
-                        (
-                            <img className="" src="https://i.imgur.com/QCeyFjY.png" alt={"Happybara"} width="190" height="240" />
-                        )
+      // Update capybara state
+      await updateDoc(capybaraDocRef, {
+        capybara_thirsty: false,
+      });
 
+      // Update user state
+      const userDocRef = doc(db, 'users', user.id);
+      await updateDoc(userDocRef, {
+        money: user.money - 1,
+      });
 
+      console.log('Capybara watered successfully');
+    } catch (error) {
+      console.error('Error watering capybara:', error);
+    }
+  };
 
-                    }
-                    {
-                        capybara.capybara_hungry == true ? (
-                            <div>
-                                <p> Seems like {capybara.capybara_name} is hungry, better feed him!</p>
-                                <button onClick={() => feedCapybara()}> Feed {capybara.capybara_name} </button>
-                            </div>
-                            
-                        )
-                            :
-                            (
-                                <p>
-
-                                </p>
-                            )
-                    }
-
-                    {
-                        capybara.capybara_thirsty == true ? (
-                            <div>
-                                <p> Seems like {capybara.capybara_name} is thirsty, better give him some water!</p>
-                                <button onClick={() => waterCapybara()}> Give water to {capybara.capybara_name} </button>
-                            </div>
-
-                        )
-                            :
-                            (
-                                <p>
-
-                                </p>
-                            )
-                    }
-
-
-                    
-                   
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )}
-
-
+  return (
+    <div className="capybara">
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="project">
+          <section>
+            {capybara.capybara_name} tells you that you have {tasks.length} things to do
+          </section>
+          {capybara.capybara_hungry || capybara.capybara_thirsty ? (
+            <img className="" src="https://i.imgur.com/gtvYvWn.png" alt={"Crappybara"} width="190" height="240" />
+          ) : (
+            <img className="" src="https://i.imgur.com/QCeyFjY.png" alt={"Happybara"} width="190" height="240" />
+          )}
+          {capybara.capybara_hungry && (
+            <div>
+              <p> Seems like {capybara.capybara_name} is hungry, better feed him!</p>
+              <button className="" onClick={feedCapybara}> Feed {capybara.capybara_name} </button>
+            </div>
+          )}
+          {capybara.capybara_thirsty && (
+            <div>
+              <p> Seems like {capybara.capybara_name} is thirsty, better give him some water!</p>
+              <button onClick={waterCapybara}> Give water to {capybara.capybara_name} </button>
+            </div>
+          )}
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default Capybara;
