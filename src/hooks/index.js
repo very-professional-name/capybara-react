@@ -8,6 +8,42 @@ import { getFirestore } from "firebase/firestore";
 
 const db = getFirestore(firebaseapp);
 
+export function useCapybara() {
+  const [capybara, setCapybara] = useState(null);
+
+  async function getCapybara(db) {
+    try {
+      const capybaraCol = collection(db, 'capybara');
+      const capybaraSnapshot = await getDocs(capybaraCol);
+
+      if (!capybaraSnapshot.empty) {
+        // Assuming there is only one capybara document
+        const capybaraData = capybaraSnapshot.docs[0].data();
+        setCapybara({
+          id: capybaraSnapshot.docs[0].id,
+          ...capybaraData
+        });
+      } else {
+        console.log('No capybara found');
+        setCapybara(null);
+      }
+    } catch (error) {
+      console.error('Error fetching capybara:', error);
+      setCapybara(null);
+    }
+  }
+
+  useEffect(() => {
+    const db = getFirestore();
+    getCapybara(db);
+  }, []); // The hook fetches capybara only once when mounted
+
+  return capybara;
+}
+
+
+
+
 export function useTasks() {
     const [tasks, setTasks] = useState([]);
 
@@ -32,10 +68,6 @@ export function useTasks() {
 
 export function useProjects() {
     const [projects, setProjects] = useState([]);
-
-  
-
-
     async function getProjects(db) {
         const projectsCol = collection(db, 'projects');
         const projectsSnapshot = await getDocs(projectsCol);
@@ -50,7 +82,7 @@ export function useProjects() {
 
     useEffect(() => {
         getProjects(db);
-    }, []); // Removed the unnecessary return statement
+    }, []);
 
     return projects; // Return the projects state after it's updated
 }
