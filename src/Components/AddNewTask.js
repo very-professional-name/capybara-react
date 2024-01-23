@@ -26,7 +26,7 @@ function AddNewTask(){
     async function handleSubmit(e){
         e.preventDefault()
         if ( text ) {
-            console.log("i didnt take a shit 1")
+            
             await addDoc(collection(db, "tasks"), {
                 text: text,
                 checked:false,
@@ -46,7 +46,7 @@ function AddNewTask(){
 
         }
 
-        console.log("i didnt take a shit 2")
+        
     }
 
     useEffect(() => {
