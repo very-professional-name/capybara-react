@@ -25,7 +25,7 @@ function App() {
 
       <Main>
         <Tasks />
-        <EditTask />
+        
 
       </Main>
       <Capybara />
