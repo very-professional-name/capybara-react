@@ -1,35 +1,23 @@
-import React, { useEffect, useState } from "react";
-import moment from 'moment'
+import React, { useContext, useEffect, useState } from "react";
+import moment from "moment";
 import Task from "./Task";
+import { TaskContext } from "../context";
+import { useFilteredTasks } from "../hooks"; // Import the custom hook
 
 function Next30Days({ tasks }) {
-  const [weekTasks, setWeekTasks] = useState([]);
+  const { selectedProject } = useContext(TaskContext);
+  const [fetchTrigger, setFetchTrigger] = useState(0); // State to trigger data fetching
+  const filteredTasks = useFilteredTasks(tasks, selectedProject, fetchTrigger); // Use the custom hook with the fetch trigger
 
   useEffect(() => {
-    const currentDate = new Date();
-
-    // Function to parse the date string in "DD/MM/YYYY" format
-    const parseDate = (dateString) => {
-      const [day, month, year] = dateString.split('/');
-      return new Date(`${year}-${month}-${day}`);
-    };
-
-    const oneMonthFromNow = new Date();
-    oneMonthFromNow.setDate(currentDate.getDate() + 30);
-
-    const filteredTasks = tasks.filter((task) => {
-      const taskDate = parseDate(task.date);
-      return taskDate >= currentDate && taskDate <= oneMonthFromNow;
-    });
-
-    filteredTasks.sort((a, b) => parseDate(a.date) - parseDate(b.date));
-
-    setWeekTasks(filteredTasks);
-  }, [tasks]); // Only re-run the effect when the 'tasks' prop changes
+    // Fetch data when the component mounts or when selectedProject changes
+    setFetchTrigger((prev) => prev + 1);
+  }, [selectedProject]);
 
   return (
     <div>
-      {weekTasks.map((task) => (
+      <p>Next 30 Days</p>
+      {filteredTasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}
     </div>

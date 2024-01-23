@@ -46,7 +46,7 @@ export function useCapybara() {
 
 export function useTasks() {
     const [tasks, setTasks] = useState([]);
-
+    
     async function getTasks(db) {
         const tasksCol = collection(db, 'tasks');
         const taskSnapshot = await getDocs(tasksCol);

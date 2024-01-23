@@ -8,8 +8,14 @@ function OldTasks({ tasks }) {
     <div>
         <p> Expired </p>
       {tasks.map((task) => (
-        <Task key={task.id} task={task} />
+        <div>
+          <Task key={task.id} task={task} />
+          
+          </div>
+        
+        
       ))}
+      
     </div>
   );
 }

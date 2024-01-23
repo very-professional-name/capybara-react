@@ -7,7 +7,7 @@ import OldTasks from "./OldTasks";
 
 function Tasks() {
   const { selectedProject, tasks } = useContext(TaskContext);
-
+  
   const hardcodedTasks = [
     { id: 1, date: '25/12/2022', description: 'Sample Task' },
     { id: 2, date: '26/12/2022', description: 'Sample  2 ' }]
