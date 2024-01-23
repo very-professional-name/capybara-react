@@ -4,6 +4,7 @@ import SignInPage from './pages/signinpage';
 import HomePage from './pages/homepage';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import SignUpPage from './pages/signuppage';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/signin" element={<SignInPage />} />
-            <Route path="/signup" element={<SignInPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
             <Route path="/" element={<HomePage />} />
           </Routes>
         </div>
