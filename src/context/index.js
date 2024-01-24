@@ -7,6 +7,7 @@ const TaskContext = createContext();
 function TaskContextProvider({ children }) {
   const defaultProject = 'today';
   const [selectedProject, setSelectedProject] = useState(defaultProject);
+  const [selectedTask, setSelectedTask] = useState(undefined);
   const capybara = useCapybara();
   const tasks = useTasks();
   const projects = useProjects();
@@ -22,7 +23,9 @@ function TaskContextProvider({ children }) {
         setSelectedProject,
         tasks: filteredTasks,
         projects,
-        capybara
+        capybara,
+        selectedTask,
+        setSelectedTask
       }}
     >
       {children}

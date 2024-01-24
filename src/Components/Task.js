@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useUser } from "../hooks";
 import firebaseapp from "../firebase";
 import { getFirestore, doc, deleteDoc, updateDoc, getDoc } from 'firebase/firestore';
 
 import { Circle, CheckCircleFill, ArrowClockwise, Trash, Check } from "react-bootstrap-icons";
+import { TaskContext } from "../context";
 
 function Task({task}){
     const db = getFirestore();
     const [hover, setHover] = useState(false)
+    const {selectedTask, setSelectedTask } = useContext(TaskContext)
+
+    const handleDelete = task => {
+        deleteTask(task);
+        if (selectedTask === task){
+            setSelectedTask(undefined);
+        }
+    }
+
+
     const deleteTask = async (task) => {
         try {
             const db = getFirestore();
@@ -76,7 +87,7 @@ function Task({task}){
                         </span>
                     }
                 </div>
-                <div className="text">
+                <div className="text" onClick={() => setSelectedTask(task)}>
                     <p style={{color : task.checked ? '#bebebe' : '#000000'}}>{task.text}</p>
                     <span>{task.hour} - {task.date} - {task.projectName}</span>
                     
@@ -102,7 +113,7 @@ function Task({task}){
                 </div>
 
                 <div className="delete-task"
-                onClick={() => deleteTask(task) }>
+                onClick={() => handleDelete(task) }>
                     {
                         (hover || task.checked) &&
                         <span>

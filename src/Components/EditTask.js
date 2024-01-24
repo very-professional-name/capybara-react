@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import TaskForm from "./TaskForm";
+import { TaskContext } from "../context";
 function EditTask(){
 
     const [text, setText] = useState()
@@ -8,19 +9,18 @@ function EditTask(){
     const [hour, setHour] = useState()
     const [taskProject, setTaskProject] = useState()
 
-    const projects = [
-        { id : 1, name : "personal", numOfTasks : 0 },
-        { id : 2, name : "work", numOfTasks : 1 },
-        { id : 3, name : "other", numOfTasks : 2 }
-    ]
+    const { selectedTask, projects } = useContext(TaskContext)
 
     function handleSubmit(e){
 
     }
     return (
-        <div className='EditTask'>
+       <div>
+        {
+            selectedTask &&
+            <div className='EditTask'>
             <div className="header">
-                Edit Todo
+                Edit Task
             </div>
             <div className="container">
                 <TaskForm
@@ -37,6 +37,8 @@ function EditTask(){
                 />
             </div>
         </div>
+        }
+       </div>
     )
 }
 

@@ -4,6 +4,7 @@ import Main from '../Components/Main';
 import User from '../Components/User';
 import AddNewTask from '../Components/AddNewTask';
 import Calendar from '../Components/Calendar';
+import EditTask from '../Components/EditTask';
 import Projects from '../Components/Projects';
 import Tasks from '../Components/Tasks';
 import Capybara from '../Components/Capybara';
@@ -20,6 +21,7 @@ function HomePage() {
       <Main>
         <Tasks />
         {/* Add other components/routes as needed */}
+        <EditTask />
       </Main>
       <Capybara />
     </div>
