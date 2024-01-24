@@ -11,7 +11,7 @@ function Sidebar({ children }){
     })
 
     const handleClick = e => {
-        if(e.target === sidebarRef.current){
+        if(e.target === sidebarRef.current || sidebarRef.current.contains(e.target)){
             setSelectedTask(undefined)
         }
     }

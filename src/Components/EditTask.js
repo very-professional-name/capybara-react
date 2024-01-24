@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import moment from "moment";
+import dayjs from "dayjs";
 import { useState } from "react";
 import TaskForm from "./TaskForm";
 import { TaskContext } from "../context";
@@ -10,6 +12,16 @@ function EditTask(){
     const [taskProject, setTaskProject] = useState()
 
     const { selectedTask, projects } = useContext(TaskContext)
+
+    useEffect(() => {
+       if(selectedTask != undefined){
+        setText(selectedTask.text)
+        setHour(moment(selectedTask.hour, 'HH:mm A'))
+        setDate(moment(selectedTask.date, 'DD/MM/YYYY'))
+        setTaskProject(selectedTask.projectName)
+       }
+    }, [selectedTask])
+
 
     function handleSubmit(e){
 
