@@ -41,8 +41,8 @@ function TaskForm({
                         <p>Choose a day</p>
                     </div>
                     <DatePicker
-                        value={date}
-                        onChange={date => setDate(date)}
+                        
+                        onChange={(date) => setDate(date)}
                     />
                 </div>
                 <div className="pick-time">
@@ -51,7 +51,7 @@ function TaskForm({
                         <p>Choose time</p>
                     </div>
                     <TimePicker
-                        value={hour}
+                        
                         onChange={hour => setHour(hour)}
                     />
                 </div>
